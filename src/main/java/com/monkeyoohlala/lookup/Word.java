@@ -1,10 +1,12 @@
 package com.monkeyoohlala.lookup;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class Word {
     }
 
     public void addWord(String word, String definition) {
-        this.wordListing.put(word ,definition);
+        this.wordListing.put(word, definition);
     }
 
     public HashMap<String, String> getWordListing() {
@@ -47,28 +49,29 @@ public class Word {
         return this.wordListing.containsKey(word);
     }
 
-    public void fetchDefinitionOfWord(String word) {
+
+    void testDef(String word) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
         WebDriver driver = new ChromeDriver(options);
-        driver.get("https://www.dictionary.com/browse/" + word);
-        List<WebElement> definitions = driver.findElements(By.xpath("//div[@id='dictionary-entry-1']//li//span"));
-        StringBuilder definition = new StringBuilder();
-        definitions.forEach(e -> {
-            definition.append(e.getText());
-            definition.append("\n");
-        });
-        wordListing.put(word, definition.toString());
-
-        System.out.println(wordListing); // You can delete this line. This is just to show you that it captures the definition in the map
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.get("https://www.merriam-webster.com/dictionary/" + word);
+        List<WebElement> definitions = driver.findElements(By.xpath("//div[@id='dictionary-entry-1']/div[@class='vg']//span[@class='dtText']"));
+        StringBuilder definitionSB = new StringBuilder();
+        for (WebElement definition : definitions) {
+            definitionSB.append(definition.getText()).append("\n");
+        }
+        wordListing.put(word, definitionSB.toString());
+        System.out.println(wordListing); // DELETE THIS LINE ONCE YOU'VE SEEN THAT IT WORKS AS EXPECTED
         driver.quit();
     }
 
     // You can delete this main method, it's just here for you to run to test the code I wrote
     public static void main(String[] args) {
         Word obj = new Word();
-        obj.fetchDefinitionOfWord("diode");
-        obj.fetchDefinitionOfWord("circuit");
+        obj.testDef("transistor");
+        obj.testDef("capacitor");
+        obj.testDef("grass");
     }
 
 }
