@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.monkeyoohlala.lookup.HelloController">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="485.0">
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="485.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TextField fx:id="lookupDefine" layoutX="57.0" layoutY="14.0" />
+                        <Label layoutX="14.0" layoutY="18.0" text="Word:" />
+                        <Label layoutX="275.0" layoutY="18.0" text="Search:" />
+                        <TextField fx:id="lookupSearch" layoutX="320.0" layoutY="14.0" />
+                        <ListView fx:id="lookupList" layoutX="14.0" layoutY="48.0" prefHeight="200.0" prefWidth="452.0" />
+                        <Button fx:id="lookupDefineButton" layoutX="216.0" layoutY="14.0" mnemonicParsing="false" onAction="#lookUpWord" text="Define" />
+                        <Button fx:id="lookupDeleteButton" layoutX="14.0" layoutY="257.0" mnemonicParsing="false" text="Delete" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TextFlow fx:id="lookupDefinitionArea" layoutX="14.0" layoutY="14.0" prefHeight="240.0" prefWidth="455.0" />
+                        <Label fx:id="lookupStatus" alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="265.0" prefHeight="25.0" prefWidth="455.0" text="Status" />
+                        <Separator layoutX="14.0" layoutY="267.0" prefHeight="5.0" prefWidth="455.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
